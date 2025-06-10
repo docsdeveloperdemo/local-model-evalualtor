@@ -1,0 +1,55 @@
+{
+  "name": "Ollama Gemma 3 4B Server",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": true,
+      "installOhMyZshConfig": true,
+      "upgradePackages": true
+    }
+  },
+  
+  "forwardPorts": [11434],
+  "portsAttributes": {
+    "11434": {
+      "label": "Ollama API",
+      "onAutoForward": "notify"
+    }
+  },
+  
+  "postCreateCommand": "npm install",
+  
+  "postStartCommand": "nohup node setup-ollama.js > ollama-startup.log 2>&1 &",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.js-debug",
+        "ms-vscode.vscode-typescript-next",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-json"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  },
+  
+  "mounts": [
+    "source=${localWorkspaceFolder}/.ollama,target=/root/.ollama,type=bind,consistency=cached"
+  ],
+  
+  "containerEnv": {
+    "OLLAMA_HOST": "0.0.0.0:11434",
+    "OLLAMA_ORIGINS": "*"
+  },
+  
+  "privileged": true,
+  
+  "shutdownAction": "stopContainer"
+}

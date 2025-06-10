@@ -1,0 +1,23 @@
+{
+  "name": "ollama-gemma-server",
+  "version": "1.0.0",
+  "description": "Dedicated Ollama server with Gemma 3 4B model",
+  "main": "setup-ollama.js",
+  "scripts": {
+    "start": "node setup-ollama.js",
+    "status": "node -e \"console.log(JSON.stringify(require('./ollama-status.json'), null, 2))\"",
+    "stop": "pkill -f 'ollama serve' || echo 'No Ollama processes found'"
+  },
+  "keywords": [
+    "ollama",
+    "gemma",
+    "llm",
+    "local-ai",
+    "devcontainer"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
