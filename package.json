@@ -4,7 +4,7 @@
   "description": "Dedicated Ollama server with Gemma 3 4B model",
   "main": "setup-ollama.js",
   "scripts": {
-    "start": "node setup-ollama.js",
+    "start": "npm install && node setup-ollama.js",
     "status": "node -e \"console.log(JSON.stringify(require('./ollama-status.json'), null, 2))\"",
     "stop": "pkill -f 'ollama serve' || echo 'No Ollama processes found'"
   },
